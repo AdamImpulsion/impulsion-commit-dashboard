@@ -1,174 +1,87 @@
 <title>Impulsion — Commit Activity by Contributor</title>
+<meta http-equiv="refresh" content="600" />
 <style>
-  :root{
-    --surface:#faf9f7; --panel:#ffffff; --border:#e3ded6;
-    --ink:#1b1a17; --ink-2:#55514a; --ink-3:#857f75;
-    --accent:#B4892E; --bar:#4A80C4; --grid:#eae5dd;
-    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
-  }
-  @media (prefers-color-scheme:dark){
-    :root{
-      --surface:#1a1a19; --panel:#212120; --border:#33322f;
-      --ink:#f2efe9; --ink-2:#b3aea4; --ink-3:#847f76;
-      --accent:#B4892E; --bar:#4A80C4; --grid:#2b2a28;
-    }
-  }
-  :root[data-theme="dark"]{
-    --surface:#1a1a19; --panel:#212120; --border:#33322f;
-    --ink:#f2efe9; --ink-2:#b3aea4; --ink-3:#847f76;
-    --accent:#B4892E; --bar:#4A80C4; --grid:#2b2a28;
-  }
-  :root[data-theme="light"]{
-    --surface:#faf9f7; --panel:#ffffff; --border:#e3ded6;
-    --ink:#1b1a17; --ink-2:#55514a; --ink-3:#857f75;
-    --accent:#B4892E; --bar:#4A80C4; --grid:#eae5dd;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--surface); color:var(--ink);
-    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    line-height:1.55; -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:940px; margin:0 auto; padding:40px 24px 72px; display:flex; flex-direction:column; gap:28px}
-  header{display:flex; flex-direction:column; gap:8px}
-  h1{margin:0; font-size:clamp(1.5rem,3.2vw,2rem); font-weight:650; letter-spacing:-.02em; text-wrap:balance}
-  .sub{margin:0; color:var(--ink-2); font-size:.9rem; max-width:62ch}
-  .asof{font-family:var(--mono); font-size:.72rem; color:var(--ink-3); letter-spacing:.02em}
-
-  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
-  .tile{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; flex-direction:column; gap:3px}
-  .tile .k{font-size:.7rem; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-3); font-weight:600}
-  .tile .v{font-size:1.55rem; font-weight:650; font-variant-numeric:tabular-nums; letter-spacing:-.02em}
-  .tile .n{font-size:.74rem; color:var(--ink-3)}
-  .tile.hl{border-color:var(--accent)}
-  .tile.hl .v{color:var(--accent)}
-
-  .panel{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px}
-  h2{margin:0 0 4px; font-size:1rem; font-weight:640; letter-spacing:-.01em}
-  .h2n{margin:0 0 18px; font-size:.8rem; color:var(--ink-3)}
-
-  .rows{display:flex; flex-direction:column; gap:9px}
-  .row{display:grid; grid-template-columns:132px 1fr 74px; align-items:center; gap:12px}
-  .name{font-size:.83rem; color:var(--ink-2); text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-  .row.me .name{color:var(--accent); font-weight:640}
-  .track{position:relative; height:20px; background:var(--grid); border-radius:4px; overflow:hidden}
-  .fill{height:100%; border-radius:0 4px 4px 0; background:var(--bar); transition:filter .12s}
-  .row.me .fill{background:var(--accent)}
-  .row:hover .fill{filter:brightness(1.14)}
-  .val{font-family:var(--mono); font-size:.8rem; font-variant-numeric:tabular-nums; color:var(--ink-2)}
-  .row.me .val{color:var(--accent); font-weight:640}
-  .row:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
-
-  .spark{display:flex; align-items:flex-end; gap:3px; height:78px; margin-top:6px}
-  .sb{flex:1; min-width:0; background:var(--bar); border-radius:3px 3px 0 0; opacity:.85}
-  .sb:last-child{background:var(--accent); opacity:1}
-  .sx{display:flex; gap:3px; margin-top:6px}
-  .sx span{flex:1; min-width:0; font-family:var(--mono); font-size:.58rem; color:var(--ink-3); text-align:center; overflow:hidden}
-
-  table{width:100%; border-collapse:collapse; font-size:.82rem}
-  th,td{text-align:left; padding:7px 10px; border-bottom:1px solid var(--border)}
-  th{font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-3); font-weight:600}
-  td.n{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right}
-  tr.me td{color:var(--accent); font-weight:600}
-  .scroll{overflow-x:auto}
-  details{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:0 20px}
-  details[open]{padding-bottom:18px}
-  summary{cursor:pointer; padding:16px 0; font-size:.88rem; font-weight:600; color:var(--ink-2)}
-  summary::marker{color:var(--ink-3)}
-  .note{font-size:.76rem; color:var(--ink-3); margin:14px 0 0; max-width:78ch}
-  .note b{color:var(--ink-2); font-weight:640}
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-  @media (max-width:560px){ .row{grid-template-columns:96px 1fr 60px; gap:8px} .name{font-size:.76rem} }
+  :root{--surface:#faf9f7;--panel:#fff;--border:#e3ded6;--ink:#1b1a17;--ink-2:#55514a;--ink-3:#857f75;--accent:#B4892E;--bar:#4A80C4;--grid:#eae5dd;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+  @media (prefers-color-scheme:dark){:root{--surface:#1a1a19;--panel:#212120;--border:#33322f;--ink:#f2efe9;--ink-2:#b3aea4;--ink-3:#847f76;--grid:#2b2a28}}
+  :root[data-theme=dark]{--surface:#1a1a19;--panel:#212120;--border:#33322f;--ink:#f2efe9;--ink-2:#b3aea4;--ink-3:#847f76;--grid:#2b2a28}
+  :root[data-theme=light]{--surface:#faf9f7;--panel:#fff;--border:#e3ded6;--ink:#1b1a17;--ink-2:#55514a;--ink-3:#857f75;--grid:#eae5dd}
+  *{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:40px 24px 72px;display:flex;flex-direction:column;gap:28px}
+  h1{margin:0;font-size:clamp(1.5rem,3.2vw,2rem);font-weight:650;letter-spacing:-.02em}
+  .sub{margin:0;color:var(--ink-2);font-size:.9rem;max-width:62ch}.asof{font-family:var(--mono);font-size:.72rem;color:var(--ink-3)}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .tile{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+  .tile .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);font-weight:600}
+  .tile .v{font-size:1.55rem;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.02em}.tile .n{font-size:.74rem;color:var(--ink-3)}
+  .tile.hl{border-color:var(--accent)}.tile.hl .v{color:var(--accent)}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px}
+  h2{margin:0 0 4px;font-size:1rem;font-weight:640}.h2n{margin:0 0 18px;font-size:.8rem;color:var(--ink-3)}
+  .rows{display:flex;flex-direction:column;gap:9px}.row{display:grid;grid-template-columns:132px 1fr 74px;align-items:center;gap:12px}
+  .name{font-size:.83rem;color:var(--ink-2);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row.me .name{color:var(--accent);font-weight:640}.track{position:relative;height:20px;background:var(--grid);border-radius:4px;overflow:hidden}
+  .fill{height:100%;border-radius:0 4px 4px 0;background:var(--bar)}.row.me .fill{background:var(--accent)}
+  .val{font-family:var(--mono);font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--ink-2)}.row.me .val{color:var(--accent);font-weight:640}
+  .spark{display:flex;align-items:flex-end;gap:3px;height:78px;margin-top:6px}.sb{flex:1;min-width:0;background:var(--bar);border-radius:3px 3px 0 0;opacity:.85}.sb:last-child{background:var(--accent);opacity:1}
+  .sx{display:flex;gap:3px;margin-top:6px}.sx span{flex:1;min-width:0;font-family:var(--mono);font-size:.58rem;color:var(--ink-3);text-align:center;overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border)}
+  th{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:600}td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+  tr.me td{color:var(--accent);font-weight:600}.scroll{overflow-x:auto}
+  details{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:0 20px}details[open]{padding-bottom:18px}
+  summary{cursor:pointer;padding:16px 0;font-size:.88rem;font-weight:600;color:var(--ink-2)}
+  .note{font-size:.76rem;color:var(--ink-3);margin:14px 0 0;max-width:78ch}.note b{color:var(--ink-2);font-weight:640}
+  .live{display:inline-flex;align-items:center;gap:6px}.dot{width:7px;height:7px;border-radius:50%;background:#37ca37;display:inline-block}
 </style>
-
 <div class="wrap">
-  <header>
+  <header style="display:flex;flex-direction:column;gap:8px">
     <h1>Commit activity by contributor</h1>
-    <p class="sub">Every commit on <code>main</code> in the Impulsion repo, from the first commit to the latest. Each person's multiple git aliases are merged into one identity.</p>
-    <p class="asof">2,476 commits · 3 Jun 2025 → 31 Jul 2026 · regenerated 3 Aug 2026</p>
+    <p class="sub">Every commit on <code>main</code> in the Impulsion repo. Each person's git aliases merged into one identity.</p>
+    <p class="asof"><span class="live"><span class="dot"></span>Auto-refreshing</span> · 2,482 commits · 2025-06-03 → 2026-08-03 · updated 2026-08-03 19:09 UTC</p>
   </header>
-
   <div class="tiles">
-    <div class="tile"><span class="k">Total commits</span><span class="v">2,476</span><span class="n">on <code>main</code></span></div>
+    <div class="tile"><span class="k">Total commits</span><span class="v">2,482</span><span class="n">on <code>main</code></span></div>
     <div class="tile"><span class="k">Contributors</span><span class="v">9</span><span class="n">after alias merge</span></div>
-    <div class="tile hl"><span class="k">Adam Olejniczak</span><span class="v">15</span><span class="n">own commits, since 30 Jul</span></div>
-    <div class="tile hl"><span class="k">Adam-directed</span><span class="v">26</span><span class="n">his 15 + 11 agent</span></div>
+    <div class="tile hl"><span class="k">Adam Olejniczak</span><span class="v">20</span><span class="n">own commits</span></div>
+    <div class="tile hl"><span class="k">Adam-directed</span><span class="v">150</span><span class="n">his 20 + 130 agent</span></div>
   </div>
-
-  <section class="panel">
-    <h2>Commits per contributor</h2>
-    <p class="h2n">All time. Adam highlighted in gold; hover any row for its share.</p>
-    <div class="rows" id="rows"></div>
-  </section>
-
-  <section class="panel">
-    <h2>Commits per month</h2>
-    <p class="h2n">Repo-wide velocity. July 2026 (gold) is the highest month on record at 780.</p>
-    <div class="spark" id="spark"></div>
-    <div class="sx" id="sparkx"></div>
-  </section>
-
-  <details>
-    <summary>Table view — exact numbers</summary>
-    <div class="scroll">
-      <table>
-        <thead><tr><th>Contributor</th><th class="n">Commits</th><th class="n">Share</th><th>Merged git aliases</th></tr></thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-  </details>
-
-  <p class="note">
-    <b>How Adam's number is counted.</b> Adam has <b>15</b> commits authored under his own identity (<code>Adam Olejniczak</code> + <code>AdamImpulsion</code>, both <code>adam@impulsion.io</code>), starting 30 Jul 2026. Separately, <b>11</b> commits in that same window were authored by AI-agent git identities while pair-working with Adam — those are counted under <b>AI agents</b>, not folded into his bar, because the commit author is what it is. The &ldquo;Adam-directed&rdquo; tile shows the honest combined figure (26) so the pairing is visible without misstating authorship.
-  </p>
-  <p class="note">
-    <b>Alias merges.</b> &ldquo;Brian Wee&rdquo; = <code>Brianwee007</code> + 2 local-machine aliases &middot; &ldquo;Sanket Kumawat&rdquo; = 2 aliases &middot; &ldquo;Ankit Sharma&rdquo; = 2 aliases &middot; &ldquo;AI agents&rdquo; = Claude, Security Sentinel, Chief of Staff, Fortress CoS, Impulsion COS/CoS, fortress &middot; &ldquo;Other&rdquo; = fortress-integration, dependabot, and single-commit authors.
-    <br><br><b>Caveat.</b> Commit count measures activity, not value — review-heavy, design-heavy and debugging work is largely invisible here, and one large commit can outweigh twenty small ones. Read it as a rough activity signal, not a ranking of contribution.
-  </p>
+  <section class="panel"><h2>Commits per contributor</h2><p class="h2n">All time. Adam highlighted in gold; hover a row for its share.</p><div class="rows" id="rows"></div></section>
+  <section class="panel"><h2>Commits per month</h2><p class="h2n">Repo-wide velocity. The current month (gold) is month-to-date.</p><div class="spark" id="spark"></div><div class="sx" id="sparkx"></div></section>
+  <details><summary>Table view — exact numbers</summary><div class="scroll"><table><thead><tr><th>Contributor</th><th class="n">Commits</th><th class="n">Share</th><th>Merged git aliases</th></tr></thead><tbody id="tbody"></tbody></table></div></details>
+  <p class="note"><b>Adam's number, honestly.</b> 20 commits authored under his own identity. Agent-identity commits made while pairing (130) are counted under "AI agents", never folded into his bar — the "Adam-directed" tile shows the combined figure. <b>Note:</b> <code>main</code> is squash-merged, so each merged PR is <b>one</b> commit here regardless of how many commits were on the branch.</p>
+  <p class="note"><b>Auto-refresh:</b> this page reloads every 10 minutes and is regenerated from live <code>git log</code> on a schedule, so the numbers stay current on their own. Commit count measures activity, not value — review- and design-heavy work is invisible here.</p>
 </div>
-
 <script>
-const DATA = [
-  {name:"Brian Wee",       n:940, aliases:"Brianwee007, brianwee@Brians-MacBook-Pro.local, brianwee@brians-mbp"},
-  {name:"Leeton DEKA",     n:453, aliases:"leetoncfo"},
-  {name:"Sobebar Ali",     n:314, aliases:"sobebar.ali17"},
-  {name:"Sanket Kumawat",  n:295, aliases:"sanketkumawat1996 (2 aliases)"},
-  {name:"Ankit Sharma",    n:209, aliases:"Ankit, Ankit Sharma"},
-  {name:"AI agents",       n:130, aliases:"Claude, Security Sentinel, Chief of Staff, Fortress CoS, Impulsion COS/CoS, fortress"},
-  {name:"Arbaaz Laskar",   n:103, aliases:"arzkar.dev"},
-  {name:"Other",           n:17,  aliases:"fortress-integration, dependabot, single-commit authors"},
-  {name:"Adam Olejniczak", n:15,  aliases:"Adam Olejniczak, AdamImpulsion", me:true},
+const DATA=[
+  {name:"Brian Wee", n:941, aliases:"Brianwee007 + local aliases"},
+  {name:"Leeton DEKA", n:453, aliases:"leetoncfo"},
+  {name:"Sobebar Ali", n:314, aliases:"sobebar.ali17"},
+  {name:"Sanket Kumawat", n:295, aliases:"2 aliases"},
+  {name:"Ankit Sharma", n:209, aliases:"2 aliases"},
+  {name:"AI agents", n:130, aliases:"Claude, Security Sentinel, Chief of Staff, Fortress/Impulsion CoS, fortress"},
+  {name:"Arbaaz Laskar", n:103, aliases:"arzkar.dev"},
+  {name:"Adam Olejniczak", n:20, aliases:"Adam Olejniczak, AdamImpulsion", me:true},
+  {name:"Other", n:17, aliases:"fortress-integration, dependabot, single-commit authors"},
 ];
-const MONTHS = [
-  ["Jun 25",136],["Jul 25",152],["Aug 25",184],["Sep 25",109],["Oct 25",44],["Nov 25",41],["Dec 25",104],
-  ["Jan 26",49],["Feb 26",79],["Mar 26",279],["Apr 26",45],["May 26",158],["Jun 26",316],["Jul 26",780],
+const MONTHS=[
+  ["Jun 25",136],
+  ["Jul 25",152],
+  ["Aug 25",184],
+  ["Sep 25",109],
+  ["Oct 25",44],
+  ["Nov 25",41],
+  ["Dec 25",104],
+  ["Jan 26",49],
+  ["Feb 26",79],
+  ["Mar 26",279],
+  ["Apr 26",45],
+  ["May 26",158],
+  ["Jun 26",316],
+  ["Jul 26",780],
+  ["Aug 26",6]
 ];
-const TOTAL = DATA.reduce((s,d)=>s+d.n,0);
-const MAX = Math.max(...DATA.map(d=>d.n));
-
-document.getElementById("rows").innerHTML = DATA.map(d=>{
-  const pct = (d.n/TOTAL*100), w = Math.max(d.n/MAX*100, .7);
-  return '<div class="row' + (d.me?" me":"") + '" tabindex="0" title="' +
-    d.name + ' — ' + d.n.toLocaleString() + ' commits, ' + pct.toFixed(1) +
-    '% of all ' + TOTAL.toLocaleString() + '">' +
-    '<div class="name">' + d.name + '</div>' +
-    '<div class="track"><div class="fill" style="width:' + w + '%"></div></div>' +
-    '<div class="val">' + d.n.toLocaleString() + '</div></div>';
-}).join("");
-
-const mMax = Math.max(...MONTHS.map(m=>m[1]));
-document.getElementById("spark").innerHTML = MONTHS.map(function(m){
-  return '<div class="sb" style="height:' + Math.max(m[1]/mMax*100,2) + '%" title="' +
-    m[0] + ' — ' + m[1] + ' commits"></div>';
-}).join("");
-document.getElementById("sparkx").innerHTML = MONTHS.map(function(m){
-  return '<span>' + m[0].split(" ")[0] + '</span>';
-}).join("");
-
-document.getElementById("tbody").innerHTML = DATA.map(function(d){
-  return '<tr class="' + (d.me?"me":"") + '"><td>' + d.name + '</td><td class="n">' +
-    d.n.toLocaleString() + '</td><td class="n">' + (d.n/TOTAL*100).toFixed(1) +
-    '%</td><td style="color:var(--ink-3);font-size:.74rem">' + d.aliases + '</td></tr>';
-}).join("") + '<tr><td><b>Total</b></td><td class="n"><b>' + TOTAL.toLocaleString() +
-  '</b></td><td class="n">100%</td><td></td></tr>';
+const TOTAL=DATA.reduce((s,d)=>s+d.n,0),MAX=Math.max(...DATA.map(d=>d.n));
+document.getElementById("rows").innerHTML=DATA.map(function(d){var pct=(d.n/TOTAL*100),w=Math.max(d.n/MAX*100,.7);return '<div class="row'+(d.me?" me":"")+'" title="'+d.name+' — '+d.n.toLocaleString()+' commits, '+pct.toFixed(1)+'%"><div class="name">'+d.name+'</div><div class="track"><div class="fill" style="width:'+w+'%"></div></div><div class="val">'+d.n.toLocaleString()+'</div></div>';}).join("");
+var mMax=Math.max.apply(null,MONTHS.map(function(m){return m[1]}));
+document.getElementById("spark").innerHTML=MONTHS.map(function(m){return '<div class="sb" style="height:'+Math.max(m[1]/mMax*100,2)+'%" title="'+m[0]+' — '+m[1]+' commits"></div>';}).join("");
+document.getElementById("sparkx").innerHTML=MONTHS.map(function(m){return '<span>'+m[0].split(" ")[0]+'</span>';}).join("");
+document.getElementById("tbody").innerHTML=DATA.map(function(d){return '<tr class="'+(d.me?"me":"")+'"><td>'+d.name+'</td><td class="n">'+d.n.toLocaleString()+'</td><td class="n">'+(d.n/TOTAL*100).toFixed(1)+'%</td><td style="color:var(--ink-3);font-size:.74rem">'+d.aliases+'</td></tr>';}).join("")+'<tr><td><b>Total</b></td><td class="n"><b>'+TOTAL.toLocaleString()+'</b></td><td class="n">100%</td><td></td></tr>';
 </script>
