@@ -34,19 +34,19 @@
 <div class="wrap">
   <header style="display:flex;flex-direction:column;gap:8px">
     <h1>Commit activity by contributor</h1>
-    <p class="sub">Every commit on <code>main</code> in the Impulsion repo. Each person's git aliases merged into one identity.</p>
-    <p class="asof"><span class="live"><span class="dot"></span>Auto-refreshing</span> · 2,482 commits · 2025-06-03 → 2026-08-03 · updated 2026-08-03 19:09 UTC</p>
+    <p class="sub">Every commit on <code>main</code> in the Impulsion repo — one team board, the same for everyone. Each person's git aliases are merged into one identity.</p>
+    <p class="asof"><span class="live"><span class="dot"></span>Auto-refreshing</span> · 2,482 commits · 2025-06-03 → 2026-08-03 · updated 2026-08-03 19:12 UTC</p>
   </header>
   <div class="tiles">
     <div class="tile"><span class="k">Total commits</span><span class="v">2,482</span><span class="n">on <code>main</code></span></div>
     <div class="tile"><span class="k">Contributors</span><span class="v">9</span><span class="n">after alias merge</span></div>
-    <div class="tile hl"><span class="k">Adam Olejniczak</span><span class="v">20</span><span class="n">own commits</span></div>
-    <div class="tile hl"><span class="k">Adam-directed</span><span class="v">150</span><span class="n">his 20 + 130 agent</span></div>
+    <div class="tile"><span class="k">Top contributor</span><span class="v">941</span><span class="n">Brian Wee</span></div>
+    <div class="tile"><span class="k">This month</span><span class="v">6</span><span class="n">Aug 26 to date</span></div>
   </div>
-  <section class="panel"><h2>Commits per contributor</h2><p class="h2n">All time. Adam highlighted in gold; hover a row for its share.</p><div class="rows" id="rows"></div></section>
+  <section class="panel"><h2>Commits per contributor</h2><p class="h2n">All time, ranked. Hover a row for its share.</p><div class="rows" id="rows"></div></section>
   <section class="panel"><h2>Commits per month</h2><p class="h2n">Repo-wide velocity. The current month (gold) is month-to-date.</p><div class="spark" id="spark"></div><div class="sx" id="sparkx"></div></section>
   <details><summary>Table view — exact numbers</summary><div class="scroll"><table><thead><tr><th>Contributor</th><th class="n">Commits</th><th class="n">Share</th><th>Merged git aliases</th></tr></thead><tbody id="tbody"></tbody></table></div></details>
-  <p class="note"><b>Adam's number, honestly.</b> 20 commits authored under his own identity. Agent-identity commits made while pairing (130) are counted under "AI agents", never folded into his bar — the "Adam-directed" tile shows the combined figure. <b>Note:</b> <code>main</code> is squash-merged, so each merged PR is <b>one</b> commit here regardless of how many commits were on the branch.</p>
+  <p class="note"><b>How to read it.</b> Every contributor is counted the same way — commits authored under their own git identity on <code>main</code>. AI-agent commit identities are grouped as "AI agents" rather than attributed to whoever paired with them. <b>Note:</b> <code>main</code> is squash-merged, so each merged PR is <b>one</b> commit here regardless of how many commits were on the branch.</p>
   <p class="note"><b>Auto-refresh:</b> this page reloads every 10 minutes and is regenerated from live <code>git log</code> on a schedule, so the numbers stay current on their own. Commit count measures activity, not value — review- and design-heavy work is invisible here.</p>
 </div>
 <script>
@@ -58,7 +58,7 @@ const DATA=[
   {name:"Ankit Sharma", n:209, aliases:"2 aliases"},
   {name:"AI agents", n:130, aliases:"Claude, Security Sentinel, Chief of Staff, Fortress/Impulsion CoS, fortress"},
   {name:"Arbaaz Laskar", n:103, aliases:"arzkar.dev"},
-  {name:"Adam Olejniczak", n:20, aliases:"Adam Olejniczak, AdamImpulsion", me:true},
+  {name:"Adam Olejniczak", n:20, aliases:"Adam Olejniczak, AdamImpulsion"},
   {name:"Other", n:17, aliases:"fortress-integration, dependabot, single-commit authors"},
 ];
 const MONTHS=[
