@@ -35,13 +35,13 @@
   <header style="display:flex;flex-direction:column;gap:8px">
     <h1>Commit activity by contributor</h1>
     <p class="sub">Every commit on <code>main</code> in the Impulsion repo — one team board, the same for everyone. Each person's git aliases are merged into one identity.</p>
-    <p class="asof"><span class="live"><span class="dot"></span>Auto-refreshing</span> · 2,487 commits · 2025-06-03 → 2026-08-03 · updated 2026-08-04 04:12 UTC</p>
+    <p class="asof"><span class="live"><span class="dot"></span>Auto-refreshing</span> · 2,501 commits · 2025-06-03 → 2026-08-03 · updated 2026-08-04 06:15 UTC</p>
   </header>
   <div class="tiles">
-    <div class="tile"><span class="k">Total commits</span><span class="v">2,487</span><span class="n">on <code>main</code></span></div>
+    <div class="tile"><span class="k">Total commits</span><span class="v">2,501</span><span class="n">on <code>main</code></span></div>
     <div class="tile"><span class="k">Contributors</span><span class="v">9</span><span class="n">after alias merge</span></div>
     <div class="tile"><span class="k">Top contributor</span><span class="v">941</span><span class="n">Brian Wee</span></div>
-    <div class="tile"><span class="k">This month</span><span class="v">11</span><span class="n">Aug 26 to date</span></div>
+    <div class="tile"><span class="k">This month</span><span class="v">25</span><span class="n">Aug 26 to date</span></div>
   </div>
   <section class="panel"><h2>Commits per contributor</h2><p class="h2n">All time, ranked. Hover a row for its share.</p><div class="rows" id="rows"></div></section>
   <section class="panel"><h2>Commits per month</h2><p class="h2n">Repo-wide velocity. The current month (gold) is month-to-date.</p><div class="spark" id="spark"></div><div class="sx" id="sparkx"></div></section>
@@ -58,7 +58,7 @@ const DATA=[
   {name:"Ankit Sharma", n:209, aliases:"2 aliases"},
   {name:"AI agents", n:130, aliases:"Claude, Security Sentinel, Chief of Staff, Fortress/Impulsion CoS, fortress"},
   {name:"Arbaaz Laskar", n:103, aliases:"arzkar.dev"},
-  {name:"Adam Olejniczak", n:25, aliases:"Adam Olejniczak, AdamImpulsion"},
+  {name:"Adam Olejniczak", n:39, aliases:"Adam Olejniczak, AdamImpulsion"},
   {name:"Other", n:17, aliases:"fortress-integration, dependabot, single-commit authors"},
 ];
 const MONTHS=[
@@ -76,7 +76,7 @@ const MONTHS=[
   ["May 26",158],
   ["Jun 26",316],
   ["Jul 26",780],
-  ["Aug 26",11]
+  ["Aug 26",25]
 ];
 const TOTAL=DATA.reduce((s,d)=>s+d.n,0),MAX=Math.max(...DATA.map(d=>d.n));
 document.getElementById("rows").innerHTML=DATA.map(function(d){var pct=(d.n/TOTAL*100),w=Math.max(d.n/MAX*100,.7);return '<div class="row'+(d.me?" me":"")+'" title="'+d.name+' — '+d.n.toLocaleString()+' commits, '+pct.toFixed(1)+'%"><div class="name">'+d.name+'</div><div class="track"><div class="fill" style="width:'+w+'%"></div></div><div class="val">'+d.n.toLocaleString()+'</div></div>';}).join("");
